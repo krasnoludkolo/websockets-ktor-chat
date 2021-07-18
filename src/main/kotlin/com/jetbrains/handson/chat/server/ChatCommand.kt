@@ -3,7 +3,6 @@ package com.jetbrains.handson.chat.server
 
 sealed class ChatCommand {
 
-
     data class GlobalMessage(
         val message: String
     ) : ChatCommand() {
@@ -23,7 +22,7 @@ sealed class ChatCommand {
     }
 
     data class PrivMessage(
-        val nick: String,
+        val receiverNick: String,
         val message: String
     ) : ChatCommand() {
 
@@ -36,4 +35,6 @@ sealed class ChatCommand {
             }
         }
     }
+
+    object Help : ChatCommand()
 }

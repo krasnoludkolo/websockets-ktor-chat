@@ -2,15 +2,16 @@ package com.jetbrains.handson.chat.server
 
 import io.ktor.http.cio.websocket.*
 import io.ktor.websocket.*
-import java.util.concurrent.atomic.AtomicInteger
+import kotlinx.coroutines.runBlocking
+import java.util.*
 
 class Connection(val session: DefaultWebSocketServerSession) {
-    companion object{
-        var lastId = AtomicInteger(0)
-    }
-    var name = "user${lastId.getAndIncrement()}"
 
-    suspend fun sendMessage(message:String){
-        session.send(message)
+    val id = UUID.randomUUID().toString()
+
+    fun sendMessage(message:String){
+        runBlocking {
+            session.send(message)
+        }
     }
 }

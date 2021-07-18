@@ -37,6 +37,7 @@ class Chat {
 
     private fun setNick(userId: String, nick: String) {
         idToNick[userId] = nick
+        idToConnection[userId]?.sendMessage("Nick set to $nick")
     }
 
     private fun sendPrivMessage(command: ChatCommand.PrivMessage, userId: String) {

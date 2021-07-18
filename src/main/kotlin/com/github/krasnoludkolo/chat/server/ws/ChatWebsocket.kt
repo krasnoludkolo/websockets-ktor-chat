@@ -5,6 +5,7 @@ import io.ktor.application.*
 import io.ktor.http.cio.websocket.*
 import io.ktor.routing.*
 import io.ktor.websocket.*
+import org.slf4j.LoggerFactory
 
 
 fun Application.chatWebsocket(chat: Chat) {
@@ -25,6 +26,7 @@ fun chatWebsocketHandler(chat: Chat): suspend DefaultWebSocketServerSession.() -
             for (frame in incoming) {
                 frame as? Frame.Text ?: continue
                 val receivedText = frame.readText()
+                logger.trace("Received text frame: [$receivedText] from ${thisConnection.getId()}")
                 val command = CommandParser.parseReceivedText(receivedText)
                 chat.executeCommand(command, thisConnection.getId())
             }
@@ -35,3 +37,4 @@ fun chatWebsocketHandler(chat: Chat): suspend DefaultWebSocketServerSession.() -
             chat.removeUser(thisConnection)
         }
     }
+private val logger = LoggerFactory.getLogger("ChatWebsocket.kt")

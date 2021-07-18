@@ -1,20 +1,20 @@
-package com.github.krasnoludkolo.chat.server
+package com.github.krasnoludkolo.chat.server.chat
 
 import java.util.concurrent.ConcurrentHashMap
 
 class Chat {
 
     private val idToNick = ConcurrentHashMap<String, String>()
-    private val idToConnection = ConcurrentHashMap<String, Connection>()
+    private val idToConnection = ConcurrentHashMap<String, ChatConnection>()
 
-    fun addUser(connection: Connection) {
-        val id = connection.id
+    fun addUser(connection: ChatConnection) {
+        val id = connection.getId()
         idToNick[id] = id
         idToConnection[id] = connection
     }
 
-    fun removeUser(connection: Connection) {
-        val id = connection.id
+    fun removeUser(connection: ChatConnection) {
+        val id = connection.getId()
         idToNick.remove(id)
         idToConnection.remove(id)
     }

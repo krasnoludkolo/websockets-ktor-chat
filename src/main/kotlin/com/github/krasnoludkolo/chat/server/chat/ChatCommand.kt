@@ -1,4 +1,4 @@
-package com.github.krasnoludkolo.chat.server
+package com.github.krasnoludkolo.chat.server.chat
 
 
 sealed class ChatCommand {

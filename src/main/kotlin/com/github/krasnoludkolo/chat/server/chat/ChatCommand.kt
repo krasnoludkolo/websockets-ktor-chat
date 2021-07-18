@@ -1,6 +1,6 @@
 package com.github.krasnoludkolo.chat.server.chat
 
-
+//TODO move to parser
 sealed class ChatCommand {
 
     data class GlobalMessage(

@@ -1,4 +1,4 @@
-package com.jetbrains.handson.chat.server
+package com.github.krasnoludkolo.chat.server
 
 import io.ktor.http.cio.websocket.*
 import io.ktor.websocket.*

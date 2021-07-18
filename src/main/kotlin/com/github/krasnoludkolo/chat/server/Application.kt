@@ -1,4 +1,4 @@
-package com.jetbrains.handson.chat.server
+package com.github.krasnoludkolo.chat.server
 
 import io.ktor.application.*
 import io.ktor.http.cio.websocket.*
@@ -6,17 +6,19 @@ import io.ktor.routing.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import io.ktor.websocket.*
+import java.util.logging.Logger
 
 
 fun main() {
     val chat = Chat()
+    logger.info("start")
     embeddedServer(Netty, port = 8080) {
-        module(chat)
+        chatWebsocket(chat)
     }.start(wait = true)
 }
 
 
-fun Application.module(chat: Chat) {
+fun Application.chatWebsocket(chat: Chat) {
     install(WebSockets)
 
     routing {
@@ -43,6 +45,7 @@ fun Application.module(chat: Chat) {
     }
 }
 
+val logger = Logger.getLogger(Application::class.java.canonicalName)
 
 fun parseReceivedText(receivedText: String): ChatCommand {
     return when {

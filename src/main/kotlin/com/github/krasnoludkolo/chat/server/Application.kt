@@ -8,7 +8,7 @@ import io.ktor.server.netty.*
 
 fun main() {
     val chat = Chat()
-    embeddedServer(Netty, port = 8080) {
+    embeddedServer(Netty, port = 20609) {
         chatWebsocket(chat)
     }.start(wait = true)
 }

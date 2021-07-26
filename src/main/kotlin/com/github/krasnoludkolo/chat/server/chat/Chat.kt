@@ -23,7 +23,7 @@ class Chat {
         when (command) {
             is ChatCommand.GlobalMessage -> sendGlobalMessage(userId, command)
             is ChatCommand.NickChange -> setNick(userId, command.nick)
-            is ChatCommand.PrivMessage -> sendPrivMessage(command, userId)
+            is ChatCommand.PrivateMessage -> sendPrivMessage(command, userId)
             ChatCommand.Help -> sendHelpMessage(userId)
         }
     }
@@ -40,7 +40,7 @@ class Chat {
         idToConnection[userId]?.sendMessage("Nick set to $nick")
     }
 
-    private fun sendPrivMessage(command: ChatCommand.PrivMessage, userId: String) {
+    private fun sendPrivMessage(command: ChatCommand.PrivateMessage, userId: String) {
         val receiverId = idToNick.entries.first { it.value == command.receiverNick }.key
         val textWithUsername = "[${idToNick[userId]} -> ${idToNick[receiverId]}]: ${command.message}"
         idToConnection[userId]?.sendMessage(textWithUsername)
